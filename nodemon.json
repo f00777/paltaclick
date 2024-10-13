@@ -1,0 +1,7 @@
+{
+    "watch": ["views", "routes", "src"],
+    "ext": "js,json,ejs,handlebars",
+    "ignore": ["src/public"],
+    "exec": "node ./bin/www"
+  }
+  

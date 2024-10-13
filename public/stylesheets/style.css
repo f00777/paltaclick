@@ -1,0 +1,119 @@
+/* body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+} */
+
+/* html, body{
+  height: 100%;
+  margin: 0;
+} */
+
+.navbar{
+  overflow:visible;
+}
+
+.navbar-toggler-icon {
+  background-image: url('data:image/svg+xml;charset=utf8,%3Csvg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"%3E%3Cpath fill="%23ffffff" d="M3 6h18v2H3zm0 4h18v2H3zm0 4h18v2H3z" /%3E%3C/svg%3E');
+} 
+
+.headerInicio{
+  background-image: url(/images/paltasheader.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50rem;
+  color: white;
+}
+
+.bg-body-black{
+  background-color: black;
+}
+
+.bg-body-rojo{
+  background-color: #bb2d3b;
+}
+
+.bg-body-amarillo{
+  background-color: #fdca2c;
+}
+
+.bg-body-verde{
+  background-color: #A0DB8E;
+}
+
+.text-verde{
+  color:#A0DB8E;
+}
+
+.placeholder-secondary{
+  &::placeholder{
+    color: gray;
+  }
+}
+
+.position-fixed{
+  position: fixed;
+}
+
+.position-block{
+  position: block;
+}
+
+.top-0{
+  top: 0;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.wallet{
+  display: inline-block;
+  position: relative;
+  transition-property: padding;
+  transition-duration: 300ms;
+}
+
+.wallet:hover{
+  padding: 0 5rem;
+}
+
+
+.dropdown-content{
+  display: none;
+  position: absolute;
+  width: 100%;
+  overflow: auto;
+  margin-right: 5rem;
+  border: none;
+}
+
+.wallet:hover .dropdown-content{
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;;
+  color: black;
+  border-radius: 0.5rem;
+  left: 0px;
+  z-index: 3;
+  
+}
+
+.dropdown-content a{
+  display: block;
+}
+
+.overflow-hidden{
+  overflow: hidden;
+}
+
+.overflow-auto{
+  overflow: auto;
+}
