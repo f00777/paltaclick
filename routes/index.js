@@ -1,16 +1,21 @@
 import express from "express";
+import { neon } from '@neondatabase/serverless';
+
+const sql = neon('postgresql://paltaclick_owner:CzyPKjdGI53A@ep-misty-bonus-a55bawz1.us-east-2.aws.neon.tech/paltaclick?sslmode=require');
 var router = express.Router();
 
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'PaltaClick', isIndex: true});
+router.get('/', async function(req, res, next) {
+  const products = await sql("SELECT * FROM products ORDER BY id LIMIT 3");
+  res.render('index', { title: 'PaltaClick', isIndex: true, products: products});
 });
 
 router.get('/nosotros', function(req, res, next) {
   res.render('nosotros', { title: 'Nosotros', isIndex: false});
 });
 
-router.get('/catalogo', function(req, res, next) {
-  res.render('catalogo', { title: 'Productos', isIndex: false});
+router.get('/catalogo', async function(req, res, next) {
+  const products = await sql("SELECT * FROM products");
+  res.render('catalogo', { title: 'Productos', isIndex: false, products: products});
 });
 router.get('/producto', function(req, res, next) {
   res.render('producto', { title: 'Producto', isIndex: false});

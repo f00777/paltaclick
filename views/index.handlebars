@@ -25,12 +25,14 @@
 
 
       <div class="ultimosProductos d-flex flex-column flex-md-row justify-content-center align-items-center">
+        
+        {{#each products}}
         <div class="row d-flex justify-content-center align-items-center">
           <div class="card col-12 col-md-4 col-xl-3 mx-3 my-3">
-            <img class="card-img-top" src="/images/paltahasschilena.webp" alt="card image cap" >
+            <img class="card-img-top" src="/products/{{this.image}}.jpg" alt="{{this.name}}" >
             <div class="card-body">
-              <h5 class="card-title fs-2 fw-bold">Palta Hass Chilena</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <h5 class="card-title fs-2 fw-bold">{{this.name}}</h5>
+              <p class="card-text">{{this.description}}</p>
               <a href="/producto" class="btn btn-primary d-block my-3">Ver Producto</a>
               <a href="#" class="btn btn-success d-block">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
@@ -39,37 +41,8 @@
               </a>
             </div>
           </div>
-
-          <div class="card col-12 col-md-4 col-xl-3 mx-3 my-3">
-            <img class="card-img-top" src="/images/paltahassperuana.jpg" alt="card image cap" >
-            <div class="card-body">
-              <h5 class="card-title fs-2 fw-bold">Palta Hass Peruana</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="/producto" class="btn btn-primary d-block my-3">Ver Producto</a>
-              <a href="#" class="btn btn-success d-block">
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
-                  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-
-          <div class="card col-12 col-md-4 col-xl-3 ms-3 my-3">
-            <img class="card-img-top" src="/images/paltacaliforniana.jpg" alt="card image cap" >
-            <div class="card-body">
-              <h5 class="card-title fs-2 fw-bold">Palta Californiana</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="/producto" class="btn btn-primary d-block my-3">Ver Producto</a>
-              <a href="#" class="btn btn-success d-block">
-                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
-                  <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"/>
-                </svg>
-              </a>
-            </div>
-          </div>
-
         </div>
-
+        {{/each}}
 
       </div>
 

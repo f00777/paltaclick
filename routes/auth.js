@@ -1,4 +1,8 @@
 import express from "express";
+import { neon } from '@neondatabase/serverless';
+
+const sql = neon('postgresql://paltaclick_owner:CzyPKjdGI53A@ep-misty-bonus-a55bawz1.us-east-2.aws.neon.tech/paltaclick?sslmode=require');
+
 var router = express.Router();
 
 router.get('/register', function(req, res, next) {
