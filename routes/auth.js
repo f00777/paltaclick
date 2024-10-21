@@ -10,6 +10,7 @@ import cookieParser from "cookie-parser";
 const sql = neon('postgresql://paltaclick_owner:CzyPKjdGI53A@ep-misty-bonus-a55bawz1.us-east-2.aws.neon.tech/paltaclick?sslmode=require');
 const CLAVE = 'aguanteelbulla';
 const AUTH_COOKIE_NAME = 'triton';
+let login = false;
 
 var router = express.Router();
 
@@ -24,9 +25,20 @@ const authMiddleware = (req, res, next) => {
   }
 }
 
+const is_auth = (req, res, next) => {
+  const token = req.cookies[AUTH_COOKIE_NAME];
 
-router.get('/register', function(req, res, next) {
-  res.render('register', { title: 'Registro', isIndex: false, regiones: regiones.regions});
+  try{
+    req.user = jwt.verify(token, CLAVE);
+    res.redirect('/catalogo');
+  
+  }catch(e){
+    next();
+  }
+}
+
+router.get('/register', is_auth ,function(req, res, next) {
+  res.render('register', { title: 'Registro', isIndex: false, regiones: regiones.regions, login: login});
 });
 
 router.post('/register', async function(req, res, next){
@@ -59,6 +71,7 @@ router.post('/register', async function(req, res, next){
     const token = jwt.sign({id, exp: fiveMinuteFromNowInSeconds}, CLAVE );
 
     res.cookie(AUTH_COOKIE_NAME, token, {maxAge: 60*5*1000});
+    login = true;
 
     res.redirect('/auth/login');
   }
@@ -70,32 +83,86 @@ router.post('/register', async function(req, res, next){
   console.log(data)
 })
 
-router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'Iniciar Sesión', isIndex: false});
+router.get('/login', is_auth, function(req, res, next) {
+  res.render('login', { title: 'Iniciar Sesión', isIndex: false, login: login}); 
 });
-router.get('/dashboard', authMiddleware, async function(req, res, next) {
-  console.log(req.user.id);
-  const [{is_admin}] = await sql(`SELECT is_admin FROM users WHERE id = ${req.user.id}`);
+
+router.post('/login', async function(req, res, next) {
+  const {email, password} = req.body;
+  const query = 'SELECT id, password FROM users WHERE email = $1';
+  const results = await sql(query, [email]);
+
+  console.log(results);
+
+  if(results.length === 0){
+    res.redirect('/auth/login?error=unknown');
+    return;
+  }
+
+  const id = results[0].id;
+  const hash = results[0].password;
+
+  if(bcrypt.compareSync(password, hash)){
+    const fiveMinuteFromNowInSeconds = Math.floor(Date.now() / 1000) + 5 * 60;
+    
+    const token = jwt.sign({id, exp: fiveMinuteFromNowInSeconds}, CLAVE );
+
+    res.cookie(AUTH_COOKIE_NAME, token, {maxAge: 60*5*1000});
+
+    res.redirect('/catalogo');
+    login = true;
+    return;
+  }
+
+  res.redirect('/auth/login?error=unknown');
   
+});
+
+
+router.get('/dashboard', authMiddleware, async function(req, res, next) {
+  const [{is_admin}] = await sql(`SELECT is_admin FROM users WHERE id = ${req.user.id}`);
   if(is_admin){
     res.render('admin', { title: 'Admin', isIndex: false});
   }
   else{
     res.redirect('/');
   }
-  
 });
-router.get('/productos', function(req, res, next) {
-  res.render('productos', { title: 'Productos', isIndex: false});
+router.get('/productos', authMiddleware, async function(req, res, next) {
+  const [{is_admin}] = await sql(`SELECT is_admin FROM users WHERE id = ${req.user.id}`);
+  if(is_admin){
+    res.render('productos', { title: 'Productos', isIndex: false});
+  }
+  else{
+    res.redirect('/');
+  }
 });
-router.get('/crear', function(req, res, next) {
+router.get('/crear', authMiddleware, async function(req, res, next) {
+  const [{is_admin}] = await sql(`SELECT is_admin FROM users WHERE id = ${req.user.id}`);
+  if(is_admin){
   res.render('crear', { title: 'Crear', isIndex: false});
+  }
+  else{
+  res.redirect('/');
+  }
 });
-router.get('/editar', function(req, res, next) {
-  res.render('editar', { title: 'Editar', isIndex: false});
+router.get('/editar', authMiddleware , async function(req, res, next) {
+  const [{is_admin}] = await sql(`SELECT is_admin FROM users WHERE id = ${req.user.id}`);
+  if(is_admin){
+    res.render('editar', { title: 'Editar', isIndex: false});
+  }
+  else{
+    res.redirect('/');
+  }
 });
-router.get('/pedidos', function(req, res, next) {
-  res.render('pedidos', { title: 'Pedidos', isIndex: false});
+router.get('/pedidos', authMiddleware, async function(req, res, next) {
+  const [{is_admin}] = await sql(`SELECT is_admin FROM users WHERE id = ${req.user.id}`);
+  if(is_admin){
+    res.render('pedidos', { title: 'Pedidos', isIndex: false});
+  }
+  else{
+    res.redirect('/');
+  }
 });
 
 export default router;
