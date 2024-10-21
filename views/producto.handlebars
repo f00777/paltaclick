@@ -3,20 +3,20 @@
 <div class="container d-flex flex-column flex-md-row my-5">
     <div class="col-12 col-md-6 d-flex flex-column flex-md-row">
         <div class="fotos col-12 col-md-2">
-            <img class="my-3 cursor-pointer" src="/images/paltahasschilena.jpg" width="100" height="100">
-            <img class="my-3 cursor-pointer" src="/images/paltahasschilena.jpg" width="100" height="100">
-            <img class="my-3 cursor-pointer" src="/images/paltahasschilena.jpg" width="100" height="100">
+            <img class="my-3 cursor-pointer" src="/products/{{product.image}}.jpg" width="100" height="100">
+            <img class="my-3 cursor-pointer" src="/products/{{product.image}}.jpg" width="100" height="100">
+            <img class="my-3 cursor-pointer" src="/products/{{product.image}}.jpg" width="100" height="100">
         </div>
         <div class="granfoto col-12 col-md-10">
-            <img class="w-100 cursor-pointer" src="/images/paltahasschilena.jpg">
+            <img class="w-100 cursor-pointer" src="/products/{{product.image}}.jpg">
         </div>
     </div>
 
     <div class="col-12 col-md-6 d-flex flex-column py-5 mx-5 justify-content-between">
         <div class="row">
-            <h2 class="fw-bold">Palta Hass Chilena</h2>
-            <h2 class="fw-bold fs-3">$5000</h2>
-            <p>La palta chilena es una variedad de aguacate reconocida por su sabor exquisito y su textura cremosa. Originaria de Chile, esta palta destaca por su alta calidad y sabor inigualable, convirtiéndola en una elección preferida tanto en la cocina local como en la internacional.</p>
+            <h2 class="fw-bold">{{product.name}}</h2>
+            <h2 class="fw-bold fs-3">${{product.price}}</h2>
+            <p>{{product.description}}</p>
         </div>
             
         <div class="row">

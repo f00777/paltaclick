@@ -19,18 +19,18 @@
                   <div class="row">
                     <div class="col-md-6 mb-4">
                       <div data-mdb-input-init class="form-outline">
-                        <input placeholder="Nombre" type="text" class="form-control form-control-lg bg-dark text-secondary placeholder-secondary" />    
+                        <input id="name" name="name" placeholder="Nombre" type="text" class="form-control form-control-lg bg-dark text-secondary placeholder-secondary" />    
                       </div>
                     </div>
                     <div class="col-md-6 mb-4">
                       <div data-mdb-input-init class="form-outline">
-                        <input placeholder="Apellido" type="text" class="form-control form-control-lg bg-dark text-secondary placeholder-secondary" />
+                        <input id="lastname" name="lastname" placeholder="Apellido" type="text" class="form-control form-control-lg bg-dark text-secondary placeholder-secondary" />
                       </div>
                     </div>
                   </div>
   
                   <div data-mdb-input-init class="form-outline mb-4">
-                    <input placeholder="Dirección" type="text" class="form-control form-control-lg bg-dark text-secondary placeholder-secondary" />
+                    <input id="address" name="address" placeholder="Dirección" type="text" class="form-control form-control-lg bg-dark text-secondary placeholder-secondary" />
                   </div>
   
                   <div class="d-md-flex justify-content-start align-items-center mb-4 py-2">
@@ -38,20 +38,20 @@
                     <h6 class="mb-0 me-4">Genero: </h6>
   
                     <div class="form-check form-check-inline mb-0 me-4">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                        value="option1" />
+                      <input id="female" class="form-check-input" type="radio" name="inlineRadioOptions"
+                        value="female" />
                       <label class="form-check-label" for="femaleGender">Mujer</label>
                     </div>
   
                     <div class="form-check form-check-inline mb-0 me-4">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                        value="option2" />
+                      <input id="male" name="gender" class="form-check-input" type="radio" name="inlineRadioOptions"
+                        value="male" />
                       <label class="form-check-label" for="maleGender">Hombre</label>
                     </div>
   
                     <div class="form-check form-check-inline mb-0">
-                      <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                        value="option3" />
+                      <input id="other" name="gender" class="form-check-input" type="radio" name="inlineRadioOptions"
+                        value="other" />
                       <label class="form-check-label" for="otherGender">Otros</label>
                     </div>
   
@@ -60,45 +60,42 @@
                   <div class="row">
                     <div class="col-md-6 mb-4">
   
-                      <select class="bg-dark p-2 text-white rounded" data-mdb-select-init>
-                        <option value="1">Región</option>
-                        <option value="2">Option 1</option>
-                        <option value="3">Option 2</option>
-                        <option value="4">Option 3</option>
+                      <select id="region" name="region" class="bg-dark p-2 text-white rounded col-6" data-mdb-select-init>
+                        <option value="1" disabled selected>Región</option>
+                        {{#each regiones}}
+                        <option value="{{this.name}}">{{this.name}}</option>
+                        {{/each}}
                       </select>
   
                     </div>
                     <div class="col-md-6 mb-4">
   
-                      <select class="bg-dark p-2 text-white rounded" data-mdb-select-init>
-                        <option value="1">Comuna</option>
-                        <option value="2">Option 1</option>
-                        <option value="3">Option 2</option>
-                        <option value="4">Option 3</option>
+                      <select id="comuna" name="comuna" class="bg-dark p-2 text-white rounded" data-mdb-select-init>
+                        <option value="1" disabled selected>Comuna</option>
                       </select>
   
                     </div>
                   </div>
   
                   <div data-mdb-input-init class="form-outline mb-4">
-                    <input placeholder="Código Postal" type="text" class="form-control form-control-lg bg-dark text-secondary placeholder-secondary" />
+                    <input id="zipcode" name="zipcode" placeholder="Código Postal" type="text" class="form-control form-control-lg bg-dark text-secondary placeholder-secondary" />
                   </div>
   
                   <div data-mdb-input-init class="form-outline mb-4">
-                    <input placeholder="Email" type="email" class="form-control form-control-lg bg-dark text-secondary placeholder-secondary" />
+                    <input id="email" name="email" placeholder="Email" type="email" class="form-control form-control-lg bg-dark text-secondary placeholder-secondary" />
                   </div>
   
                   <div data-mdb-input-init class="form-outline mb-4">
-                    <input placeholder="Contraseña" type="password" class="form-control form-control-lg bg-dark text-secondary placeholder-secondary" />
+                    <input id="password" name="password" placeholder="Contraseña" type="password" class="form-control form-control-lg bg-dark text-secondary placeholder-secondary" />
                   </div>
 
                   <div data-mdb-input-init class="form-outline mb-4">
-                    <input placeholder="Repetir Contraseña" type="password" class="form-control form-control-lg bg-dark text-secondary placeholder-secondary" />
+                    <input id="password2" name="password2" placeholder="Repetir Contraseña" type="password" class="form-control form-control-lg bg-dark text-secondary placeholder-secondary" />
                   </div>
   
                   <div class="d-flex justify-content-end pt-3">
-                    <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-light btn-lg">Reset all</button>
-                    <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn bg-body-verde btn-lg ms-2">Submit form</button>
+                    <button id="reset"  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-light btn-lg">Reset all</button>
+                    <button id="submit" type="button" data-mdb-button-init data-mdb-ripple-init class="btn bg-body-verde btn-lg ms-2">Submit form</button>
                   </div>
   
                 </div>
@@ -110,5 +107,51 @@
     </div>
 </section>
 
+<form style="display: none;" method="POST">
+  <input 
+    id="name1"
+    name="name"
+    value="">
+
+  <input 
+    id="lastname1"
+    name="lastname"
+    value="">
+
+  <input 
+    id="address1"
+    name="address"
+    value="">
+
+  <input 
+    id="gender1"
+    name="gender"
+    value="">
+
+  <input 
+    id="zipcode1"
+    name="zipcode"
+    value="">
+
+  <input 
+    id="email1"
+    name="email"
+    value="">
+  
+  <input 
+    id="password1"
+    name="password"
+    value="">
+  <input 
+    id="password12"
+    name="password2"
+    value="">
+  
+  <button
+    id="submit2"
+    type="submit">
+  </button>
+</form>
+<script src="/javascript/register.js"></script>
 
 {{>footer}}

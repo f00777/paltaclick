@@ -1,5 +1,6 @@
 import express from "express";
 import { neon } from '@neondatabase/serverless';
+import bcrypt from "bcryptjs";
 
 const sql = neon('postgresql://paltaclick_owner:CzyPKjdGI53A@ep-misty-bonus-a55bawz1.us-east-2.aws.neon.tech/paltaclick?sslmode=require');
 var router = express.Router();
@@ -17,8 +18,10 @@ router.get('/catalogo', async function(req, res, next) {
   const products = await sql("SELECT * FROM products");
   res.render('catalogo', { title: 'Productos', isIndex: false, products: products});
 });
-router.get('/producto', function(req, res, next) {
-  res.render('producto', { title: 'Producto', isIndex: false});
+router.get('/producto/:id', async function(req, res, next) {
+  const id = req.params.id;
+  const product = await sql(`SELECT * FROM products WHERE id = ${id}`);
+  res.render('producto', { title: 'Producto', isIndex: false, product: product[0]});
 });
 
 router.get('/contacto', function(req, res, next) {
