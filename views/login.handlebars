@@ -2,6 +2,12 @@
 
 <div class="container w-50 mt-5">
 
+    {{#if error}}
+    <div id="error" class="bg-danger p-1 rounded d-flex justify-content-center align-items-center m-2">
+        <p class="text-center text-white fs-5 m-0">El usuario no existe o la contraseña es incorrecta</p>
+    </div>
+    {{/if}}
+
     <h2 class="text-center fs-1 fw-bolder">Iniciar Sesión</h2>
     
     <!-- Pills content -->

@@ -37,6 +37,18 @@ const is_auth = (req, res, next) => {
   }
 }
 
+
+
+function isLogin(){
+  const token = req.cookies[AUTH_COOKIE_NAME];
+  if(token){
+    req.user = jwt.verify(token, CLAVE);
+    if(req.user){
+      return true;
+    }
+  }
+}
+
 router.get('/register', is_auth ,function(req, res, next) {
   res.render('register', { title: 'Registro', isIndex: false, regiones: regiones.regions, login: login});
 });
@@ -76,23 +88,27 @@ router.post('/register', async function(req, res, next){
     res.redirect('/auth/login');
   }
   else{
-    
-    res.render('')
+    res.redirect('/register?error=invalid');
   }
-
-  console.log(data)
 })
 
 router.get('/login', is_auth, function(req, res, next) {
-  res.render('login', { title: 'Iniciar Sesión', isIndex: false, login: login}); 
+  const error = req.query.error;
+  console.log(req.user);
+  
+  if(error == 'unknown'){
+    res.render('login', { title: 'Iniciar Sesión', isIndex: false, login: login, error: error}); 
+  }
+  else{
+    res.render('login', { title: 'Iniciar Sesión', isIndex: false, login: login}); 
+  }
+  
 });
 
 router.post('/login', async function(req, res, next) {
   const {email, password} = req.body;
   const query = 'SELECT id, password FROM users WHERE email = $1';
   const results = await sql(query, [email]);
-
-  console.log(results);
 
   if(results.length === 0){
     res.redirect('/auth/login?error=unknown');
@@ -110,7 +126,7 @@ router.post('/login', async function(req, res, next) {
     res.cookie(AUTH_COOKIE_NAME, token, {maxAge: 60*5*1000});
 
     res.redirect('/catalogo');
-    login = true;
+    console.log(login);
     return;
   }
 
@@ -164,5 +180,11 @@ router.get('/pedidos', authMiddleware, async function(req, res, next) {
     res.redirect('/');
   }
 });
+
+router.get('/logout', function(req,res){
+  res.clearCookie[AUTH_COOKIE_NAME];
+  res.redirect('/');
+})
+
 
 export default router;
