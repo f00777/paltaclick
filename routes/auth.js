@@ -147,12 +147,15 @@ router.get('/dashboard', authMiddleware, async function(req, res, next) {
 router.get('/productos', authMiddleware, async function(req, res, next) {
   const [{is_admin}] = await sql(`SELECT is_admin FROM users WHERE id = ${req.user.id}`);
   if(is_admin){
-    res.render('productos', { title: 'Productos', isIndex: false});
+    const products = await sql("SELECT * FROM products");
+    res.render('productos', { title: 'Productos', isIndex: false, products: products});
   }
   else{
     res.redirect('/');
   }
 });
+
+
 router.get('/crear', authMiddleware, async function(req, res, next) {
   const [{is_admin}] = await sql(`SELECT is_admin FROM users WHERE id = ${req.user.id}`);
   if(is_admin){
@@ -162,6 +165,35 @@ router.get('/crear', authMiddleware, async function(req, res, next) {
   res.redirect('/');
   }
 });
+
+router.post('/crear', authMiddleware, async function(req, res, next) {
+  const [{is_admin}] = await sql(`SELECT is_admin FROM users WHERE id = ${req.user.id}`);
+  if(is_admin){
+  const datos = req.body;
+  const claves = Object.keys(datos);
+
+  if(is_admin)
+    for(let i=0; i<claves.length; i++){
+      console.log(datos[claves[i]]);
+
+      if(datos[claves[i]] == ""){
+        res.redirect("/auth/productos");
+        return;
+      }
+    }
+
+    const {name, price, description, stock, image} = datos;
+    const query = "INSERT INTO products (name, price, description, stock, image) VALUES ($1, $2, $3, $4, $5)";
+    const result = await sql(query, [name, price, description, stock, image]);
+
+    res.redirect("/auth/crear");
+
+  }
+  else{
+  res.redirect('/');
+  }
+});
+
 router.get('/editar', authMiddleware , async function(req, res, next) {
   const [{is_admin}] = await sql(`SELECT is_admin FROM users WHERE id = ${req.user.id}`);
   if(is_admin){
