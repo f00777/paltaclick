@@ -9,13 +9,15 @@
             <div class="card-header py-3">
               <h5 class="mb-0">Mis productos</h5>
             </div>
+
+            {{#each products}}
             <div class="card-body">
               <!-- Single item -->
               <div class="row">
                 <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                   <!-- Image -->
                   <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                    <img src="/images/paltahasschilena.jpg"
+                    <img src="/products/{{this.image}}"
                       class="w-100" alt="Blue Jeans Jacket" />
                     <a href="#!">
                       <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
@@ -26,7 +28,7 @@
   
                 <div class="col-lg-5 col-md-6 mb-4 mb-lg-0 d-flex flex-column justify-content-between">
                   <!-- Data -->
-                  <p><strong>Palta Hass Chilena</strong></p>
+                  <p><strong>{{this.name}}</strong></p>
                   <button type="button" class="btn btn-danger mb-2 w-25"
                     title="Eliminar del Carrito">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
@@ -39,18 +41,16 @@
                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                   <!-- Quantity -->
                   <div class="d-flex mb-4" style="max-width: 300px">
-                    <button class="btn btn-primary px-3 me-2 h-25"
-                      onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                    <button data-id="{{this.id}}" class="btn btn-primary px-3 me-2 h-25 botonmenos">
                       -
                     </button>
   
                     <div data-mdb-input-init class="form-outline">
-                      <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control" />
+                      <input data-id="{{this.id}}" data-price="{{this.price}}" class="btn-qty" id="form1" min="0" name="quantity" value="{{this.quantity}}" type="number" class="form-control" />
                       <label class="form-label" for="form1">Cantidad</label>
                     </div>
   
-                    <button class="btn btn-primary ms-2 h-25"
-                      onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                    <button data-id="{{this.id}}" class="btn btn-primary ms-2 h-25 botonmas">
                       +
                     </button>
                   </div>
@@ -58,130 +58,14 @@
   
                   <!-- Price -->
                   <p class="text-start text-md-center">
-                    <strong>$5000</strong>
+                    <strong>${{this.price}}</strong>
                   </p>
                   <!-- Price -->
                 </div>
               </div>
               
             </div>
-
-
-            <div class="card-body">
-              <!-- Single item -->
-              <div class="row">
-                <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
-                  <!-- Image -->
-                  <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                    <img src="/images/paltahassperuana.jpg"
-                      class="w-100" alt="Blue Jeans Jacket" />
-                    <a href="#!">
-                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
-                    </a>
-                  </div>
-                  <!-- Image -->
-                </div>
-  
-                <div class="col-lg-5 col-md-6 mb-4 mb-lg-0 d-flex flex-column justify-content-between">
-                  <!-- Data -->
-                  <p><strong>Palta Hass Peruana</strong></p>
-                  <button type="button" class="btn btn-danger mb-2 w-25"
-                    title="Eliminar del Carrito">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
-                    </svg>
-                  </button>
-                  <!-- Data -->
-                </div>
-  
-                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                  <!-- Quantity -->
-                  <div class="d-flex mb-4" style="max-width: 300px">
-                    <button class="btn btn-primary px-3 me-2 h-25"
-                      onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                      -
-                    </button>
-  
-                    <div data-mdb-input-init class="form-outline">
-                      <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control" />
-                      <label class="form-label" for="form1">Cantidad</label>
-                    </div>
-  
-                    <button class="btn btn-primary ms-2 h-25"
-                      onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                      +
-                    </button>
-                  </div>
-                  <!-- Quantity -->
-  
-                  <!-- Price -->
-                  <p class="text-start text-md-center">
-                    <strong>$3000</strong>
-                  </p>
-                  <!-- Price -->
-                </div>
-              </div>
-              
-            </div>
-
-            <div class="card-body">
-              <!-- Single item -->
-              <div class="row">
-                <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
-                  <!-- Image -->
-                  <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
-                    <img src="/images/paltacaliforniana.jpg"
-                      class="w-100" alt="Blue Jeans Jacket" />
-                    <a href="#!">
-                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
-                    </a>
-                  </div>
-                  <!-- Image -->
-                </div>
-  
-                <div class="col-lg-5 col-md-6 mb-4 mb-lg-0 d-flex flex-column justify-content-between">
-                  <!-- Data -->
-                  <p><strong>Palta Hass Californiana</strong></p>
-                  <button type="button" class="btn btn-danger mb-2 w-25"
-                    title="Eliminar del Carrito">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"/>
-                    </svg>
-                  </button>
-                  <!-- Data -->
-                </div>
-  
-                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
-                  <!-- Quantity -->
-                  <div class="d-flex mb-4" style="max-width: 300px">
-                    <button class="btn btn-primary px-3 me-2 h-25"
-                      onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                      -
-                    </button>
-  
-                    <div data-mdb-input-init class="form-outline">
-                      <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control" />
-                      <label class="form-label" for="form1">Cantidad</label>
-                    </div>
-  
-                    <button class="btn btn-primary ms-2 h-25"
-                      onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                      +
-                    </button>
-                  </div>
-                  <!-- Quantity -->
-  
-                  <!-- Price -->
-                  <p class="text-start text-md-center">
-                    <strong>$3000</strong>
-                  </p>
-                  <!-- Price -->
-                </div>
-              </div>
-              
-            </div>
-
-
+            {{/each}}
 
 
           </div>
@@ -216,7 +100,7 @@
                 <li
                   class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                   Productos
-                  <span>$11000</span>
+                  <span class="precioFinal">$</span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-center px-0">
                   Envío
@@ -227,11 +111,11 @@
                   <div>
                     <strong>Total A Pagar</strong>
                   </div>
-                  <span><strong>$11.000</strong></span>
+                  <span><strong class="precioFinal">$</strong></span>
                 </li>
               </ul>
   
-              <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block">
+              <button id="pay" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg btn-block">
                 Ir a Pagar
               </button>
             </div>
@@ -241,5 +125,5 @@
     </div>
   </section>
 
-
+  <script src="/javascript/cart.js"></script>
 {{>footer}}

@@ -8,26 +8,26 @@
             <div class="col-12 col-md-3 bg-body-amarillo p-3 rounded">
                 <h3 class="fw-bold text-center">Ingresos del Día</h3>
                 <br>
-                <p class="text-white fs-5 text-center"><strong>$11000</strong></p>
+                <p class="text-white fs-5 text-center"><strong>${{ingresoDia}}</strong></p>
             </div>
 
             <div class="col-12 col-md-3 bg-body-verde p-3 rounded my-4 my-md-0 mx-md-3">
                 <h3 class="fw-bold text-center">Ingresos de la Semana</h3>
-                <p class="text-white fs-5 text-center"><strong>$11000</strong></p>
+                <p class="text-white fs-5 text-center"><strong>${{ingresoSemana}}</strong></p>
             </div>
 
             <div class="col-12 col-md-3 bg-body-rojo p-3 rounded">
                 <h3 class="fw-bold text-center">Ingresos del Año</h3>
                 <br>
-                <p class="text-white fs-5 text-center"><strong>$11000</strong></p>
+                <p class="text-white fs-5 text-center"><strong>${{ingresoAno}}</strong></p>
             </div>
         </div>
 
         <div class="col-12 p-3 bg-primary my-4 rounded">
             <h3 class="text-white text-center">Últimos Pedidos</h3>
-            <p class="text-white text-center">1kg Palta Hass Chilena</p>
-            <p class="text-white text-center">1kg Palta Hass Peruana</p>
-            <p class="text-white text-center">1kg Palta Californiana</p>
+            {{#each productos}}
+            <p class="text-white text-center">{{this.quantity}} kg {{this.name}}</p>
+            {{/each}}
         </div>
         
 

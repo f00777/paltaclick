@@ -18,45 +18,21 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{#each orders}}
                     <tr>
                         <th scope="row">
-                            <p>1</p>
+                            <p>{{this.quantity}}</p>
                         </th>
-                        <td class="tm-product-name">Palta hass Chilena</td>
-                        <td><p>Manuel Rodriguez 777</p></td>
+                        <td class="tm-product-name">{{this.name}}</td>
+                        <td><p>{{this.address}}</p></td>
                         <td>
-                            <p>Domingo 8 de Septiembre de 2024</p>
+                            <p>{{this.date}}</p>
                         </td>
                         <td>
-                            <p><strong>$5000</strong></p>
+                            <p><strong>${{this.price}}</strong></p>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row">
-                            <p>1</p>
-                        </th>
-                        <td class="tm-product-name">Palta hass Peruana</td>
-                        <td><p>Vergara 777</p></td>
-                        <td>
-                            <p>Domingo 8 de Septiembre de 2024</p>
-                        </td>
-                        <td>
-                            <p><strong>$3000</strong></p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <p>1</p>
-                        </th>
-                        <td class="tm-product-name">Palta Californiana</td>
-                        <td><p>Gorbea 777</p></td>
-                        <td>
-                            <p>Domingo 8 de Septiembre de 2024</p>
-                        </td>
-                        <td>
-                            <p><strong>$3000</strong></p>
-                        </td>
-                    </tr>
+                    {{/each}}
                 </tbody>
                 </table>
             </div>
@@ -64,7 +40,7 @@
         </div>
         </div>
 
-        <h3 class="fw-bold my-5">Total Gastado: <strong>$11.000</strong> </h3>
+        <h3 class="fw-bold my-5">Total Gastado: <strong>${{total}}</strong> </h3>
     </div>
 
 
