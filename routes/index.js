@@ -22,7 +22,7 @@ const authMiddleware = (req, res, next) => {
 
 
 router.get('/', async function(req, res, next) {
-  const products = await sql("SELECT * FROM products ORDER BY id LIMIT 3");
+  const products = await sql("SELECT * FROM products ORDER BY id DESC LIMIT 3");
   
   let isLogged = false
 

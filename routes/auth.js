@@ -229,6 +229,8 @@ router.get('/editar/:id', authMiddleware , async function(req, res, next) {
     res.redirect('/');
   }
 });
+
+
 router.get('/pedidos', authMiddleware, async function(req, res, next) {
   const [{is_admin}] = await sql(`SELECT is_admin FROM users WHERE id = ${req.user.id}`);
   if(is_admin){
